@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TodoListApp</string>
+    <string name="welcome">Bienvenido!!</string>
+    <string name="category">Categorias</string>
+    <string name="task">Tareas</string>
+    <string name="hintTask">Añade tarea</string>
+    <string name="txtBussines">Negocios</string>
+    <string name="txtpersonal">Personal</string>
+    <string name="txtOthers">Otros</string>
+    <string name="addTask">Añadir tarea</string>
+
+</resources>
