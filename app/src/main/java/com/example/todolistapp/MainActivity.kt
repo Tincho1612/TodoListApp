@@ -13,7 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
-    private val tasks= mutableListOf<taskData>(
+    private var tasks= mutableListOf<taskData>(
         taskData("Reunion",TaskCategory.Bussines),
         taskData("PruebaP",TaskCategory.Personal),
         taskData("PruebaOther",TaskCategory.Other)
@@ -80,9 +80,12 @@ class MainActivity : AppCompatActivity() {
     private fun updateTask(){
         val selectedCategories:List<TaskCategory> = categories.filter { it.isSelected }
         val newTasks=tasks.filter { selectedCategories.contains(it.category) }
-        taskAdapter.tasks=newTasks
+        taskAdapter.tasks=newTasks.toMutableList()
         taskAdapter.notifyDataSetChanged()
+
+
     }
+
 
     private fun initUI(){
         categoriesAdapter= CategoriesAdapter(categories){
@@ -91,10 +94,15 @@ class MainActivity : AppCompatActivity() {
         rvCategories.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         rvCategories.adapter=categoriesAdapter
 
-        taskAdapter= TaskAdapter(tasks,{onItemSelected(it)})
+        taskAdapter= TaskAdapter(tasks,{onItemSelected(it)}){removerTarea(it)}
         // no se pone lo de antes ya que es vertical por defecto
         rvTasks.layoutManager= LinearLayoutManager(this)
         rvTasks.adapter=taskAdapter
+    }
+    fun removerTarea(taskData: taskData){
+        tasks.remove(taskData)
+        taskAdapter.tasks=tasks
+        taskAdapter.notifyDataSetChanged()
     }
     private fun updateCategories(posicion:Int){
         categories[posicion].isSelected = !categories[posicion].isSelected

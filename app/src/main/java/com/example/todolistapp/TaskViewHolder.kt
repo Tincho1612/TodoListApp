@@ -6,6 +6,7 @@ import android.graphics.Paint
 
 import android.view.View
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 class TaskViewHolder (view:View):RecyclerView.ViewHolder(view) {
     private val tvTask:TextView= view.findViewById(R.id.tvTask)
     private val cbTask:CheckBox = view.findViewById(R.id.cbTask)
+     val btnRemove = view.findViewById<ImageView>(R.id.btnRemove)
     fun render(task:taskData){
         if (task.isSelected){
             tvTask.paintFlags = tvTask.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -32,6 +34,7 @@ class TaskViewHolder (view:View):RecyclerView.ViewHolder(view) {
             ContextCompat.getColor(cbTask.context,color)
         )
     }
+
 
 
 }
